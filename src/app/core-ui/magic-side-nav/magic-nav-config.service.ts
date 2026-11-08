@@ -418,7 +418,15 @@ export class MagicNavConfigService {
   }
 
   private _buildMainRoutesItems(): NavItem[] {
-    const items: NavItem[] = [];
+    const items: NavItem[] = [
+      {
+        type: 'route',
+        id: 'gtd',
+        label: T.GTD.TITLE,
+        icon: 'explore',
+        route: '/gtd',
+      },
+    ];
 
     if (this.isPlannerEnabled()) {
       items.push({

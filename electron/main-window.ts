@@ -256,7 +256,7 @@ export const createWindow = async ({
     height: mainWindowState.height,
     minHeight: 240,
     minWidth: 300,
-    title: IS_DEV ? 'Super Productivity D' : 'Super Productivity',
+    title: IS_DEV ? 'Super Productivity GTD Dev' : 'Super Productivity GTD',
     titleBarStyle,
     titleBarOverlay,
     enableLargerThanScreen: isScreenshotMode,

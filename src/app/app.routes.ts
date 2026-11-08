@@ -14,6 +14,16 @@ import {
 import { TagTaskPageComponent } from './pages/tag-task-page/tag-task-page.component';
 
 export const APP_ROUTES: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'gtd' },
+  {
+    path: 'gtd',
+    loadComponent: () =>
+      import('./pages/gtd-dashboard/gtd-dashboard.component').then(
+        (m) => m.GtdDashboardComponent,
+      ),
+    data: { page: 'gtd' },
+    canActivate: [FocusOverlayOpenGuard],
+  },
   // Eagerly loaded — this is the main view
   {
     path: 'tag/:id/tasks',

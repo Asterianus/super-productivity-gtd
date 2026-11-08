@@ -37,14 +37,14 @@ import { START_MINIMIZED_ARG } from './start-minimized';
 import * as fs from 'fs';
 
 const ICONS_FOLDER = __dirname + '/assets/icons/';
-const APP_DISPLAY_NAME = 'Super Productivity';
+const APP_DISPLAY_NAME = 'Super Productivity GTD';
 // Filename of the .desktop entry electron-builder installs, i.e.
 // `${linux.executableName}.desktop`. The `.desktop` suffix is required and is
 // what Electron's own default uses: `Browser::SetAsDefaultProtocolClient` hands
 // this value straight to `g_desktop_app_info_new()`, which wants a desktop-file
 // id, while the window identity strips the suffix itself. Coupled to the
 // desktop entry by `tools/verify-linux-wm-class.test.js`.
-const LINUX_DESKTOP_NAME = 'superproductivity.desktop';
+const LINUX_DESKTOP_NAME = 'super-productivity-gtd.desktop';
 const IS_MAC = process.platform === 'darwin';
 // const DESKTOP_ENV = process.env.DESKTOP_SESSION;
 // const IS_GNOME = DESKTOP_ENV === 'gnome' || DESKTOP_ENV === 'gnome-xorg';
@@ -136,12 +136,9 @@ export const startApp = (): void => {
     }
 
     if (val && val.includes('--user-data-dir=')) {
-      const customUserDir = val
-        .replace('--user-data-dir=', '')
-        .trim()
-        .replace(/[\/\\]+$/, ''); // Remove trailing slashes
-      log('Using custom directory for user data', customUserDir);
-      app.setPath('userData', customUserDir);
+      throw new Error(
+        'GTD preview does not support overriding its isolated data directory.',
+      );
     }
 
     if (val && val.includes('--custom-url=')) {

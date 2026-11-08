@@ -1,5 +1,5 @@
-appId: superProductivity
-productName: Super Productivity
+appId: io.github.Asterianus.SuperProductivityGTD
+productName: Super Productivity GTD
 artifactName: ${name}-${arch}.${ext}
 
 files:
@@ -90,10 +90,10 @@ portable:
 
 linux:
   # Fix for issue #5259: Set executable name without spaces for snap compatibility
-  executableName: superproductivity
+  executableName: super-productivity-gtd
   category: Office;ProjectManagement
   mimeTypes:
-    - x-scheme-handler/superproductivity
+    - x-scheme-handler/superproductivity-gtd
   desktop:
     entry:
       # Must equal LINUX_DESKTOP_NAME in electron/start-app.ts, which pins the
@@ -103,7 +103,7 @@ linux:
       # Electron <= 41, where it came from the renamed binary's basename (#9450).
       # The Electron 43 bump (#9571, v18.20.0) moved it to the XDG app id, so the
       # `-bin` value now matches nothing on either session type.
-      StartupWMClass: superproductivity
+      StartupWMClass: super-productivity-gtd
   target:
     - AppImage
     - deb

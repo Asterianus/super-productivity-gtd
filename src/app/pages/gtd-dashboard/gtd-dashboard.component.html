@@ -1,0 +1,50 @@
+<header>
+  <p>{{ T.GTD.EDITION | translate }}</p>
+  <h1>{{ T.GTD.TITLE | translate }}</h1>
+  <p>{{ T.GTD.INTRO | translate }}</p>
+  <nav>
+    <a mat-stroked-button routerLink="/project/INBOX/tasks">{{ T.GTD.INBOX | translate }}</a>
+    <a mat-stroked-button routerLink="/tag/TODAY/tasks">{{ T.GTD.TODAY | translate }}</a>
+  </nav>
+</header>
+<div class="dashboard-grid">
+  <section class="goals">
+    <h2><mat-icon>flag</mat-icon>{{ T.GTD.GOALS | translate }}</h2>
+    <p>{{ T.GTD.GOALS_DESCRIPTION | translate }}</p>
+    <small>{{ T.GTD.PLANNED | translate }}</small>
+  </section>
+  <section>
+    <h2><mat-icon>folder</mat-icon>{{ T.GTD.PROJECTS | translate }}</h2>
+    <p>{{ T.GTD.PROJECTS_DESCRIPTION | translate }}</p>
+    <ul>
+      @for (project of projects(); track project.id) {
+        <li><a [routerLink]="['/project', project.id, 'tasks']">{{ project.title }}</a></li>
+      }
+    </ul>
+  </section>
+  <section class="next-actions">
+    <h2><mat-icon>play_arrow</mat-icon>{{ T.GTD.NEXT_ACTIONS | translate }}</h2>
+    <p>{{ T.GTD.NEXT_ACTIONS_DESCRIPTION | translate }}</p>
+    <ul>
+      @for (task of nextActions(); track task.id) {
+        <li class="action-row">
+          <mat-checkbox [aria-label]="T.GTD.COMPLETE_TASK | translate" (change)="completeTask(task.id)" />
+          <a [routerLink]="['/project', task.projectId, 'tasks']" >{{ task.title }}</a>
+        </li>
+      } @empty {
+        <li>{{ T.GTD.NO_ACTIONS | translate }}</li>
+      }
+    </ul>
+  </section>
+  <section>
+    <h2><mat-icon>place</mat-icon>{{ T.GTD.CONTEXTS | translate }}</h2>
+    <p>{{ T.GTD.CONTEXTS_DESCRIPTION | translate }}</p>
+    <ul>
+      @for (context of contexts(); track context.id) {
+        <li><a [routerLink]="['/tag', context.id, 'tasks']">{{ context.title }}</a></li>
+      } @empty {
+        <li>{{ T.GTD.NO_CONTEXTS | translate }}</li>
+      }
+    </ul>
+  </section>
+</div>

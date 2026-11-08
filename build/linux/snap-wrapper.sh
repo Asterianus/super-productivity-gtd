@@ -35,7 +35,7 @@ else
   SELF=$(readlink -f "$0" 2>/dev/null || echo "$0")
   BIN_DIR=$(dirname "$SELF")
 fi
-BIN="$BIN_DIR/superproductivity-bin"
+BIN="$BIN_DIR/super-productivity-gtd-bin"
 
 # If the user already supplied --ozone-platform on argv, don't override. Stop
 # scanning at -- so positional args aren't misread as flags.
