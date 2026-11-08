@@ -20,19 +20,27 @@ describe('GtdDashboardComponent', () => {
       providers: [
         provideRouter([]),
         { provide: TaskService, useValue: { setDone: done } },
-        provideMockStore({ selectors: [
-          { selector: selectUnarchivedProjects, value: [] },
-          { selector: selectAllTags, value: [
-            { ...DEFAULT_TAG, id: 'na', title: 'NA' },
-            { ...DEFAULT_TAG, id: 'home', title: 'c-home' },
-            { ...DEFAULT_TAG, id: 'other', title: 'Other' },
-          ] },
-          { selector: selectAllTasksInActiveProjects, value: [
-            { ...DEFAULT_TASK, id: 'next', title: 'Call supplier', tagIds: ['na'] },
-            { ...DEFAULT_TASK, id: 'done', tagIds: ['na'], isDone: true },
-            { ...DEFAULT_TASK, id: 'ordinary', tagIds: [] },
-          ] },
-        ] }),
+        provideMockStore({
+          selectors: [
+            { selector: selectUnarchivedProjects, value: [] },
+            {
+              selector: selectAllTags,
+              value: [
+                { ...DEFAULT_TAG, id: 'na', title: 'NA' },
+                { ...DEFAULT_TAG, id: 'home', title: 'c-home' },
+                { ...DEFAULT_TAG, id: 'other', title: 'Other' },
+              ],
+            },
+            {
+              selector: selectAllTasksInActiveProjects,
+              value: [
+                { ...DEFAULT_TASK, id: 'next', title: 'Call supplier', tagIds: ['na'] },
+                { ...DEFAULT_TASK, id: 'done', tagIds: ['na'], isDone: true },
+                { ...DEFAULT_TASK, id: 'ordinary', tagIds: [] },
+              ],
+            },
+          ],
+        }),
       ],
     }).compileComponents();
   });
@@ -40,7 +48,9 @@ describe('GtdDashboardComponent', () => {
   it('shows only unfinished NA tasks and c- Contexts', () => {
     const fixture = TestBed.createComponent(GtdDashboardComponent);
     fixture.detectChanges();
-    expect(fixture.componentInstance.nextActions().map((task) => task.id)).toEqual(['next']);
+    expect(fixture.componentInstance.nextActions().map((task) => task.id)).toEqual([
+      'next',
+    ]);
     expect(fixture.componentInstance.contexts().map((tag) => tag.id)).toEqual(['home']);
     expect(fixture.nativeElement.querySelectorAll('.action-row').length).toBe(1);
   });
