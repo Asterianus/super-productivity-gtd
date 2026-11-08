@@ -60,7 +60,9 @@ Validation results are added after executing the checks. A successful compile al
 - `npm run test:electron`: passed. The new isolation tests also ran separately: 3 passed, 0 failed.
 - `npm run test:tools`: passed after aligning the RPM post-install link with the GTD identity.
 - `npm run lint:css-vars`: passed.
+- Full `npm run lint`: passed in the final distribution run (TypeScript/templates, SCSS, CSS variables, lint-rule tests, tooling tests and macOS icon checks).
 - Required `checkFile` checks on modified TypeScript and SCSS: passed. `t.const.ts` is generated using `tools/extract-i18n-single.js` and excluded from ESLint; it is validated through the production build, not claimed as linted.
+- Full distribution command `SP_SKIP_WAYLAND_IDLE_HELPER_BUILD=1 NG_BUILD_MAX_WORKERS=2 NODE_OPTIONS=--max-old-space-size=8192 npm run dist:gtd:linux`: passed end to end in 249 seconds.
 - Linux packaging with `electron-builder --linux AppImage deb --x64 --publish never`: passed. Both artifacts were produced. The optional Rust Wayland idle helper was intentionally omitted because Cargo is absent in this build environment.
 - DEB metadata and maintainer script inspected: package, `/opt` installation path, executable, desktop entry, URL scheme and AppArmor profile use the GTD name. No Conflicts/Replaces field targeting the original package.
 - Angular dashboard spec: its two tests compile after increasing the Node heap and setting one build worker, but **did not execute**. Chromium cannot create its singleton Unix socket in this workspace (`Operation not permitted`).
